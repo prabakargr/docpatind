@@ -6,7 +6,8 @@ const Slot = require("../model/timeslot");
 const create = async (req, res) => {
     console.log("reached");
     [
-        check("slot", "Please enter a valid password").isEmpty()
+        check("slotFrom", "Please enter Slot From").isEmpty(),
+        check("slotTrom", "Please enter Slot To").isEmpty()
     ],
 
     errors = validationResult(req);
@@ -18,11 +19,11 @@ const create = async (req, res) => {
         });
     }
 
-    const {userId,slot,booked,slotDate}=req.body
-
+    const {userId,slotFrom,slotTo,booked,slotDate,period,bookedBy}=req.body
+    console.log(req.body);
 
     try {
-        let slotOld=await Slot.findOne({ userId,slot,slotDate})
+        let slotOld=await Slot.findOne({ userId,slotFrom,slotDate})
         if (slotOld) {
             return res.status(400).json({
               msg: "Slot already exist"
@@ -31,9 +32,12 @@ const create = async (req, res) => {
 
       let slotObj=new Slot({
             userId,
-            slot,
+            slotFrom,
+            slotTo,
             slotDate,
-            booked
+            booked,
+            period,
+            bookedBy
         })
     let newSlot = await slotObj.save()
         if(newSlot){
@@ -47,8 +51,25 @@ const create = async (req, res) => {
 
 const slotsByUserIdandDate = async (req,res)=>{
     const {userId,slotDate}=req.body
+    console.log(req.body);
     try {
-        let slots=await Slot.find({userId,slotDate})
+        let slots=await Slot.find({
+            "userId":req.body.userId,
+            "slotDate":req.body.slotDate
+            
+        })
+        if(slots){
+            res.send({data:slots})
+        }
+    } catch (error) {
+        throw error
+    }
+}
+const slotsByBooked = async (req,res)=>{
+    const {userId,slotDate,booked}=req.body
+    console.log(req.body);
+    try {
+        let slots=await Slot.find({userId,slotDate,booked})
         if(slots){
             res.send({data:slots})
         }
@@ -58,24 +79,10 @@ const slotsByUserIdandDate = async (req,res)=>{
 }
 
 const blockSlot = async (req,res)=>{
-    const {userId,slotDate,booked,slot}=req.body
+    const {userId,slotDate,booked,slotFrom,bookedBy,period}=req.body
     console.log({booked});
     try {
-        let book = await Slot.findOneAndUpdate({userId,slot,slotDate},{booked})
-        // ((err,book)=>{
-        //     if (!err) {
-        //         res.send({ data: book })
-        //     } else {
-        //         res.send({ data: err, msg: "failed" })
-        //     }
-        // }))
-        // (err,book=>{
-        //     if (err) {
-        //         res.send({ data: err, msg: "failed" })
-        //     } else {
-        //         res.send({ data: Slot.findOne({userId,slot,slotDate}) })
-        //     }
-        // })
+        let book = await Slot.findOneAndUpdate({userId,slotFrom,slotDate,period},{booked,bookedBy})
         if(book){
             res.send({msg:"Slot Booked"})
         }else{
@@ -89,5 +96,6 @@ const blockSlot = async (req,res)=>{
 module.exports={
     create:create,
     slotsByUserIdandDate:slotsByUserIdandDate,
-    blockSlot:blockSlot
+    blockSlot:blockSlot,
+    slotsByBooked:slotsByBooked
 }

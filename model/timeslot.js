@@ -5,7 +5,11 @@ const SlotSchema = mongoose.Schema({
         type:String,
         required:true
     },
-    slot:{
+    slotFrom:{
+        type:String,
+        required:true
+    },
+    slotTo:{
         type:String,
         required:true
     },
@@ -14,7 +18,15 @@ const SlotSchema = mongoose.Schema({
         required:true
     },
     slotDate:{
-        type:Date,
+        type:String,
+        required:true
+    },
+    bookedBy:{
+        type:Object,
+        default:""
+    },
+    period:{
+        type:String,
         required:true
     },
     createdAt:{

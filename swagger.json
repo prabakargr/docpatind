@@ -1,157 +1,194 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "version": "1.0.0", 
-      "title": "My User Project CRUD",
-      "description": "My User Project Application API",
-      "license": {
-        "name": "MIT",
-        "url": "https://opensource.org/licenses/MIT"
-      }
-    },
-    "host": "http://localhost:4000",
-    "basePath": "/api",
-    "tags": [
-      {
-        "name": "Users",
-        "description": "API for users in the system"
-      }
-    ],
-    "schemes": ["http"],
-    "consumes": ["application/json"],
-    "produces": ["application/json"],
-    "paths": {
-        "/user/allUsers": {
-          "get": {
-            "tags": ["Users"],
-            "parameters": [
-              {
-                  "name": "token",
-                  "in": "header",
-                  "description": "Token",
-                  "type":"string",
-                  "schema": {
-                      "$ref": "#/definitions/allUsers"
-                  }
-              }
-          ],
-            "summary": "Get all users in system",
-            "responses": {
-              "200": {
-                "description": "OK",
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0", 
+    "title": "My User Project CRUD",
+    "description": "My User Project Application API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "http://localhost:4000",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "API for users in the system"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+      "/user/allUsers": {
+        "get": {
+          "tags": ["Users"],
+          "parameters": [
+            {
+                "name": "token",
+                "in": "header",
+                "description": "Token",
+                "type":"string",
                 "schema": {
-                  "$ref": "#/definitions/Users"
+                    "$ref": "#/definitions/allUsers"
                 }
+            }
+        ],
+          "summary": "Get all users in system",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Users"
               }
             }
           }
-        },
-        "/user/signup": {
-            "post": {
-                "tags": [
-                    "Users"
-                ],
-                "description": "Create new user in system",
-                "parameters": [
-                    {
-                        "name": "user",
-                        "in": "body",
-                        "description": "User that we want to create",
-                        "schema": {
-                            "$ref": "#/definitions/User"
-                        }
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "New user is created",
-                        "schema": {
-                            "$ref": "#/definitions/User"
-                        }
-                    }
-                }
-            }
-        },
-        "/user/login":{
-            "post":{
-                "tags": [
-                    "Users"
-                ],
-                "description": "Login user in system",
-                "parameters": [
-                    {
-                        "name": "user",
-                        "in": "body",
-                        "description": "User that we want to login",
-                        "schema": {
-                            "$ref": "#/definitions/login"
-                        }
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Logged in ",
-                        "schema": {
-                            "$ref": "#/definitions/login"
-                        }
-                    }
-                }
-            }
-        },
-        "/slot/create":{
-          "post":{
-          "tags":["Slot"],
-          "description":"Create Slot",
-          "parameters":[
-            {
-              "name": "slot creation",
-              "in": "body",
-              "description": "User want to create slot",
-              "schema": {
-                  "$ref": "#/definitions/createSlot"
+        }
+      },
+      "/user/signup": {
+          "post": {
+              "tags": [
+                  "Users"
+              ],
+              "description": "Create new user in system",
+              "parameters": [
+                  {
+                      "name": "user",
+                      "in": "body",
+                      "description": "User that we want to create",
+                      "schema": {
+                          "$ref": "#/definitions/User"
+                      }
+                  }
+              ],
+              "produces": [
+                  "application/json"
+              ],
+              "responses": {
+                  "200": {
+                      "description": "New user is created",
+                      "schema": {
+                          "$ref": "#/definitions/User"
+                      }
+                  }
               }
-              
-          },
+          }
+      },
+      "/user/login":{
+          "post":{
+              "tags": [
+                  "Users"
+              ],
+              "description": "Login user in system",
+              "parameters": [
+                  {
+                      "name": "user",
+                      "in": "body",
+                      "description": "User that we want to login",
+                      "schema": {
+                          "$ref": "#/definitions/login"
+                      }
+                  }
+              ],
+              "produces": [
+                  "application/json"
+              ],
+              "responses": {
+                  "200": {
+                      "description": "Logged in ",
+                      "schema": {
+                          "$ref": "#/definitions/login"
+                      }
+                  }
+              }
+          }
+      },
+      "/slot/create":{
+        "post":{
+        "tags":["Slot"],
+        "description":"Create Slot",
+        "parameters":[
           {
-            "name": "token",
-            "in": "header",
-            "description": "Token",
-            "type":"string",
+            "name": "slot creation",
+            "in": "body",
+            "description": "User want to create slot",
             "schema": {
                 "$ref": "#/definitions/createSlot"
             }
-        }
-          ],
-          "produces": [
-            "application/json"
-        ],
-        "responses": {
-            "200": {
-                "description": "New Slot is created",
-                "schema": {
-                    "$ref": "#/definitions/createSlot"
-                }
-            }
-        }
-          }
+            
         },
-        "/slot/findSlots":{
-          "post":{
+        {
+          "name": "token",
+          "in": "header",
+          "description": "Token",
+          "type":"string",
+          "schema": {
+              "$ref": "#/definitions/createSlot"
+          }
+      }
+        ],
+        "produces": [
+          "application/json"
+      ],
+      "responses": {
+          "200": {
+              "description": "New Slot is created",
+              "schema": {
+                  "$ref": "#/definitions/createSlot"
+              }
+          }
+      }
+        }
+      },
+      "/slot/findSlots":{
+        "post":{
+        "tags":["Slot"],
+        "description":"Slot List",
+        "parameters":[
+          {
+            "name": "List",
+            "in": "body",
+            "description": "User slot",
+            "schema": {
+                "$ref": "#/definitions/findSlot"
+            }
+            
+        },
+        {
+          "name": "token",
+          "in": "header",
+          "description": "Token",
+          "type":"string",
+          "schema": {
+              "$ref": "#/definitions/findSlot"
+          }
+      }
+        ],
+        "produces": [
+          "application/json"
+      ],
+      "responses": {
+          "200": {
+              "description": "New Slot is created",
+              "schema": {
+                  "$ref": "#/definitions/createSlot"
+              }
+          }
+      }
+        }
+      },
+      "/slot/blockSlot":{
+        "post":{
           "tags":["Slot"],
           "description":"Slot List",
           "parameters":[
             {
-              "name": "List",
+              "name": "Update",
               "in": "body",
-              "description": "User slot",
+              "description": "book slot",
               "schema": {
-                  "$ref": "#/definitions/findSlot"
+                  "$ref": "#/definitions/updateSlot"
               }
               
           },
@@ -161,7 +198,7 @@
             "description": "Token",
             "type":"string",
             "schema": {
-                "$ref": "#/definitions/findSlot"
+                "$ref": "#/definitions/updateSlot"
             }
         }
           ],
@@ -170,139 +207,111 @@
         ],
         "responses": {
             "200": {
-                "description": "New Slot is created",
-                "schema": {
-                    "$ref": "#/definitions/createSlot"
-                }
-            }
-        }
-          }
-        },
-        "/slot/blockSlot":{
-          "post":{
-            "tags":["Slot"],
-            "description":"Slot List",
-            "parameters":[
-              {
-                "name": "Update",
-                "in": "body",
-                "description": "book slot",
+                "description": "Slot is Booked",
                 "schema": {
                     "$ref": "#/definitions/updateSlot"
                 }
-                
-            },
-            {
-              "name": "token",
-              "in": "header",
-              "description": "Token",
-              "type":"string",
-              "schema": {
-                  "$ref": "#/definitions/updateSlot"
-              }
-          }
-            ],
-            "produces": [
-              "application/json"
-          ],
-          "responses": {
-              "200": {
-                  "description": "Slot is Booked",
-                  "schema": {
-                      "$ref": "#/definitions/updateSlot"
-                  }
-              }
-          }
             }
+        }
+          }
+      }
+    },
+    "definitions": {
+      "User": {
+        "required": ["username", "email", "password"],
+        "properties": {
+          "username": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "userType":{
+            "type":"string"
+          }
         }
       },
-      "definitions": {
-        "User": {
-          "required": ["username", "email", "password"],
-          "properties": {
-            "username": {
-              "type": "string",
-              "uniqueItems": true
-            },
-            "email": {
-              "type": "string"
-            },
-            "password": {
-              "type": "string"
-            },
-            "userType":{
-              "type":"string"
-            }
+      "login":{
+        "required": ["email", "password"],
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
           }
-        },
-        "login":{
-          "required": ["email", "password"],
-          "properties": {
-            "email": {
-              "type": "string"
-            },
-            "password": {
-              "type": "string"
-            }
-          }
-        },
-        "allUsers":{
-          "required":["token"],
-          "properties":{
-            "token":{
-              "type":"string"
-            }
-          }
-        },
-        "createSlot":{
-          "required":["userId","slot","slotDate","booked"],
-          "properties":{
-            "userId": {
-              "type": "string"
-            },
-            "slot": {
-              "type": "string"
-            },
-            "slotDate":{
-              "type":"string"
-            },
-            "booked":{
-              "type":"string"
-            }
-          }
-        },
-        "findSlot":{
-          "required":["userId","slotDate"],
-          "properties":{
-            "userId": {
-              "type": "string"
-            },
-            "slotDate":{
-              "type":"string"
-            }
-          }
-        },
-        "updateSlot": {
-          "required":["userId","slotDate","booked","slot"],
-          "properties":{
-            "userId": {
-              "type": "string"
-            },
-            "slotDate":{
-              "type":"string",
-              "format":"date-time"},
-            "booked":{
-              "type":"string"
-            },
-            "slot":{
-             "type":"string" 
-            }
-          }
-        },
-        "Users": {
-          "type": "array",
-          "$ref": "#/definitions/User"
         }
+      },
+      "allUsers":{
+        "required":["token"],
+        "properties":{
+          "token":{
+            "type":"string"
+          }
+        }
+      },
+      "createSlot":{
+        "required":["userId","slot","slotDate","booked"],
+        "properties":{
+          "userId": {
+            "type": "string"
+          },
+          "slotDate":{
+            "type":"string",
+            "format":"date-time"
+          },
+          "booked":{
+            "type":"string"
+          },
+          "slotFrom":{
+            "type":"string"
+          },
+          "slotTo":{
+            "type":"string"
+          }
+        }
+      },
+      "findSlot":{
+        "required":["userId","slotDate"],
+        "properties":{
+          "userId": {
+            "type": "string"
+          },
+          "slotDate":{
+            "type":"string"
+          }
+        }
+      },
+      "updateSlot": {
+        "required":["userId","slotDate","booked","slot"],
+        "properties":{
+          "userId": {
+            "type": "string"
+          },
+          "slotDate":{
+            "type":"string",
+            "format":"date-time"},
+          "booked":{
+            "type":"string"
+          },
+          "slotFrom":{
+           "type":"string" 
+          },
+          "bookedBy":{
+            "type":"string"
+          },
+          "period":{
+            "type":"string"
+          }
+        }
+      },
+      "Users": {
+        "type": "array",
+        "$ref": "#/definitions/User"
       }
     }
-  
+  }

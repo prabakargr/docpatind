@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const InitiateMongoServer = require("./config/db");
 const routes = require("./routes/index"); //new addition
-
+var cors = require('cors')
 const swaggerUi = require("swagger-ui-express"),
 swaggerDocument = require("./swagger.json");
 
@@ -16,6 +16,7 @@ const PORT = process.env.PORT || 4000;
 
 // Middleware
 app.use(bodyParser.json());
+app.use(cors())
 
 app.get("/", (req, res) => {
   res.json({ message: "API Working" });

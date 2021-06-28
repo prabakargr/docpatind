@@ -77,7 +77,6 @@ const login =async (req,res)=>{
 
 const signup = async(req,res)=>{
         [
-          check("username", "Please Enter a Valid Username").not().isEmpty(),
           check("email", "Please enter a valid email").isEmail(),
           check("password", "Please enter a valid password").isLength({
           min: 6
@@ -91,10 +90,14 @@ const signup = async(req,res)=>{
           }
       
           const {
-            username,
+            name,
             email,
             password,
-            userType
+            userType,
+            gender,
+            age,
+            contact
+
           } = req.body;
           try {
             let user = await User.findOne({
@@ -107,10 +110,13 @@ const signup = async(req,res)=>{
             }
       
             user = new User({
-              username,
+              name,
               email,
               password,
-              userType
+              userType,
+              gender,
+              age,
+              contact
             });
       
             const salt = await bcrypt.genSalt(10);

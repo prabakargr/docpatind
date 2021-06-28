@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const autoIncrement = require('mongoose-auto-increment'); 
 const UserSchema = mongoose.Schema({
-    username: {
+    name: {
       type: String,
       required: true
     },
@@ -14,6 +14,18 @@ const UserSchema = mongoose.Schema({
       required: true
     },
     userType:{
+      type:String,
+      required:true
+    },
+    gender:{
+      type:String,
+      required:true
+    },
+    age:{
+      type:String,
+      required:true
+    },
+    contact:{
       type:String,
       required:true
     },
