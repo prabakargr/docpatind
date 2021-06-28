@@ -9,7 +9,7 @@
         "url": "https://opensource.org/licenses/MIT"
       }
     },
-    "host": "https://patdocind.herokuapp.com",
+    "host": "http://localhost:4000",
     "basePath": "/api",
     "tags": [
       {
