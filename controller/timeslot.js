@@ -59,13 +59,30 @@ const slotsByUserIdandDate = async (req,res)=>{
 
 const blockSlot = async (req,res)=>{
     const {userId,slotDate,booked,slot}=req.body
+    console.log({booked});
     try {
-        let book = await Slot.findByIdAndUpdate({userId,slotDate,slot},{booked})
+        let book = await Slot.findOneAndUpdate({userId,slot,slotDate},{booked})
+        // ((err,book)=>{
+        //     if (!err) {
+        //         res.send({ data: book })
+        //     } else {
+        //         res.send({ data: err, msg: "failed" })
+        //     }
+        // }))
+        // (err,book=>{
+        //     if (err) {
+        //         res.send({ data: err, msg: "failed" })
+        //     } else {
+        //         res.send({ data: Slot.findOne({userId,slot,slotDate}) })
+        //     }
+        // })
         if(book){
-            res.send({data:book,msg:"success"})
+            res.send({msg:"Slot Booked"})
+        }else{
+            res.send({msg:"book"})
         }
     } catch (error) {
-        throw error
+        res.send(error) 
     }
 }
 

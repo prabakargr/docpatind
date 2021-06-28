@@ -289,8 +289,8 @@
               "type": "string"
             },
             "slotDate":{
-              "type":"string"
-            },
+              "type":"string",
+              "format":"date-time"},
             "booked":{
               "type":"string"
             },
