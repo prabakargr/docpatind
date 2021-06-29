@@ -22,9 +22,10 @@ app.get("/", (req, res) => {
   res.json({ message: "API Working" });
 });
 
-app.use("/api",routes,
-swaggerUi.serve, 
-  swaggerUi.setup(swaggerDocument));
+// app.use("/api",routes,
+// swaggerUi.serve, 
+//   swaggerUi.setup(swaggerDocument));
+app.use('/api',routes)
 
 
 app.listen(PORT, (req, res) => {
